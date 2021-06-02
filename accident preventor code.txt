@@ -1,0 +1,54 @@
+const int led=13;
+const int trig=11;`
+const int echo=12;
+const int buzzer=6;
+
+
+void setup() 
+{
+ Serial.begin(9600);
+ pinMode(led,OUTPUT);
+ pinMode(trig,OUTPUT);
+ pinMode(echo,INPUT);
+ pinMode(buzzer,OUTPUT);
+
+  Serial.print("ULTRASONIC SENSOR STARTING......");
+  Serial.println("");
+  delay(250);
+
+}
+
+void loop()
+{
+  int duration,distance;
+  digitalWrite(led,HIGH);
+  
+  {
+  digitalWrite(trig,LOW);
+  delay(250);
+  digitalWrite(trig,HIGH);
+  delay(250);
+  digitalWrite(trig,LOW);
+  duration=pulseIn(echo,HIGH);
+  distance=(duration/2)*0.0343;
+  Serial.print(distance);
+  Serial.println(" cm");
+  if (distance<=20)
+  {
+    Serial.println("vehicle present");
+    digitalWrite(buzzer,HIGH);
+    {
+      delay(1000);
+      digitalWrite(buzzer,LOW);
+      delay(200);
+    }
+    delay(500);
+else
+  {
+   
+    Serial.println("vehicle is absent");
+    delay(500);
+  }
+  
+  
+  }
